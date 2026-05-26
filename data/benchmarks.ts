@@ -7,6 +7,6 @@ export type GradeBenchmark = { p25: number; p50: number; p75: number };
 export const gradeRateBenchmarks: Record<FirmGrade, GradeBenchmark> = {
   Partner:   { p25: 478, p50: 510, p75: 548 },
   Associate: { p25: 352, p50: 375, p75: 402 },
-  Solicitor: { p25: 262, p50: 285, p75: 308 },
+  Solicitor: { p25: 262, p50: 285, p75: 315 },
   Paralegal: { p25: 178, p50: 195, p75: 215 },
 };
