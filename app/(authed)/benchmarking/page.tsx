@@ -1,6 +1,8 @@
 import KpiCard from "@/components/spend/KpiCard";
 import RatePositioningChart from "@/components/spend/RatePositioningChart";
 import OverpaymentBreakdown from "@/components/spend/OverpaymentBreakdown";
+import BenchmarkingTabs from "@/components/spend/BenchmarkingTabs";
+import PeerSpendBenchmarking from "@/components/spend/PeerSpendBenchmarking";
 import { firms, GRADES } from "@/data/firms";
 import { gradeRateBenchmarks } from "@/data/benchmarks";
 import { firmHours } from "@/data/benchmarking";
@@ -16,7 +18,6 @@ function computeTotalOverpayment(firmId: string) {
 }
 
 export default function BenchmarkingPage() {
-  // "Above benchmark" = average variance across all grades exceeds 5%
   const firmsAbove = firms.filter((f) => {
     const avg = GRADES.reduce((sum, g) =>
       sum + (f.rateSchedule[g] - gradeRateBenchmarks[g].p50) / gradeRateBenchmarks[g].p50, 0
@@ -25,7 +26,6 @@ export default function BenchmarkingPage() {
   });
   const penroseOverpayment = computeTotalOverpayment("penrose-bell");
 
-  // Panel value summary rows
   const firmSummary = firms.map((f) => {
     const variances = GRADES.map((g) =>
       ((f.rateSchedule[g] - gradeRateBenchmarks[g].p50) / gradeRateBenchmarks[g].p50) * 100
@@ -34,7 +34,7 @@ export default function BenchmarkingPage() {
     return { firm: f, avg };
   });
 
-  return (
+  const rateBenchmarkingContent = (
     <div className="space-y-8">
 
       {/* Page header */}
@@ -43,10 +43,10 @@ export default function BenchmarkingPage() {
           className="text-2xl font-semibold text-[#1F3A5F]"
           style={{ fontFamily: "var(--font-source-serif-4)" }}
         >
-          Benchmarking
+          Rate Benchmarking
         </h1>
         <p className="mt-1 text-sm text-[#334155]/60">
-          Rate comparison against anonymised peer-Trust data · 14 comparable NHS Trusts · North of England region
+          Panel firm rates compared against anonymised peer-Trust data · 14 comparable NHS Trusts · North of England region
         </p>
       </div>
 
@@ -180,5 +180,12 @@ export default function BenchmarkingPage() {
 
       </div>
     </div>
+  );
+
+  return (
+    <BenchmarkingTabs
+      rateContent={rateBenchmarkingContent}
+      peerContent={<PeerSpendBenchmarking />}
+    />
   );
 }
