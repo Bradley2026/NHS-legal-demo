@@ -123,4 +123,156 @@ export const adviceDocs: AdviceDocument[] = [
     body: "// TODO: Full document content from David",
     tags: ["agency staffing", "workforce", "NHS England", "rate cap", "framework", "compliance", "tier 1", "reporting"],
   },
+  {
+    id: "adv-011",
+    title: "Employment — Dismissal for Long-Term Sickness Absence and Disability Risks",
+    department: "Employment",
+    firmId: "hartwell-vine",
+    date: "2023-03-14",
+    summary:
+      "Hartwell & Vine LLP (instructing solicitor Jane Thompson) advised the Trust on whether it could fairly dismiss an employee absent on long-term sickness leave for some 14 months (approximately 450 days) due to mental health issues, where disability status under the Equality Act 2010 had not yet been assessed. The advice sets out the fairness framework under section 98 of the Employment Rights Act 1996, the critical disability discrimination risk where mental health conditions are involved, and the positive duty to make reasonable adjustments. It warns against relying on an informal HR assessment of disability rather than occupational health evidence, and sets out the mandatory procedural steps: commission an occupational health assessment, explicitly assess disability status, genuinely consider and document reasonable adjustments, conduct meaningful consultation, and treat dismissal as a last resort. Risks identified include disability discrimination awards of £20,000 to £100,000+, unfair dismissal, constructive dismissal, and CQC/reputational exposure. This synthetic advice is modelled on the failures exposed in the University Hospitals of Morecambe Bay NHS Foundation Trust (2024) tribunal decision and would have prevented them.",
+    body: `LEGAL ADVICE — LONG-TERM SICKNESS ABSENCE AND DISMISSAL
+
+To: Anytown NHS Trust — Director of HR and Head of Governance
+From: Hartwell & Vine LLP (Instructing Solicitor: Jane Thompson)
+Date: 14 March 2023
+Classification: Employment & HR — Dismissal and capability
+Matter Type: Sickness absence and capability dismissal
+
+BACKGROUND
+
+You have advised us that you have an employee (referred to in this advice as "Employee A" to preserve confidentiality) who has been on continuous sick leave for 14 months due to mental health issues.
+
+You have indicated that:
+- The employee's absences commenced in February 2022
+- The employee has now accumulated approximately 450 days of sick leave
+- Management wishes to explore whether dismissal on grounds of capability is appropriate
+- You are not currently certain whether the employee meets the definition of "disabled" under the Equality Act 2010
+
+You have asked for advice on:
+1. The legal framework for dismissal based on sickness absence
+2. The procedural steps you must follow
+3. The specific risks if the employee is disabled
+4. What documentation you should obtain before proceeding
+
+LEGAL POSITION
+
+Dismissal for long-term sickness absence is potentially fair under section 98 of the Employment Rights Act 1996, provided the Trust follows a fair procedure and can demonstrate a genuine business case. However, this must be approached with considerable caution given the disability discrimination risks we outline below.
+
+1. THE FAIRNESS FRAMEWORK
+Dismissal for sickness absence is fair if: (a) the Trust has obtained up-to-date medical evidence about the employee's condition and prognosis; (b) the Trust has genuinely considered alternatives to dismissal (phased return, role adjustment, redeployment); (c) the employee has been consulted meaningfully about the medical evidence and proposed action; (d) the Trust has followed a procedurally fair process; and (e) the dismissal falls within the band of reasonable responses. Tribunals will closely scrutinise whether an employer genuinely explored alternatives before dismissing. Dismissal should be a last resort, not a first response to prolonged absence.
+
+2. THE DISABILITY DISCRIMINATION RISK — CRITICAL
+The Equality Act 2010 defines disability as a physical or mental impairment that has a substantial and long-term adverse effect on the ability to carry out normal day-to-day activities. Mental health conditions frequently meet this definition. An employee absent for 14+ months due to mental health issues is very likely to be disabled within the statutory meaning, regardless of whether they have obtained a formal diagnosis. You must not assume the employee is not disabled simply because they have not told you, have no diagnosis, have not claimed benefits, or because an informal HR assessment concludes they are "not disabled".
+
+3. REASONABLE ADJUSTMENTS DUTY
+If the employee is disabled (which is likely), you have a positive duty to make reasonable adjustments to support their work or return to work — for example a phased return, temporary redeployment, flexible working, additional support, or consideration of a different role. You must genuinely consider these before proceeding to dismissal; a tick-box exercise is not enough.
+
+4. PROCEDURAL REQUIREMENTS
+Step 1: Obtain medical evidence — commission an occupational health assessment addressing diagnosis, prognosis, restrictions, recommended adjustments, and likelihood of return within a reasonable timeframe. An HR manager's informal assessment is not sufficient.
+Step 2: Assess disability status explicitly and document it. If there is uncertainty, assume disability applies.
+Step 3: Consider reasonable adjustments and document what was considered and why accepted or rejected.
+Step 4: Hold a genuine consultation meeting — share the evidence, seek the employee's response, discuss adjustments, explore return to work, and document thoroughly.
+Step 5: Make a documented decision — phased return, redeployment, continued leave with review, or dismissal as a last resort with full justification.
+
+5. SPECIFIC RISKS TO YOUR ORGANISATION
+Risk 1: Disability discrimination claim (awards £20,000 to £100,000+) if you dismiss without proper evidence, disability assessment, adjustment consideration, or fair consultation.
+Risk 2: Unfair dismissal if procedure is not followed.
+Risk 3: Constructive dismissal if the process is handled poorly and the employee resigns.
+Risk 4: Reputational and regulatory risk — NHS Trusts are subject to CQC inspection on governance and wellbeing.
+
+RECOMMENDATIONS
+1. Commission an occupational health assessment urgently (2-3 weeks).
+2. Make no dismissal decision until that evidence is available.
+3. Document the entire process clearly from this point forward.
+4. Involve occupational health in the adjustment discussion.
+5. Conduct a structured consultation.
+6. Make a documented decision, in order of preference: (A) phased return with adjustments; (B) redeployment with adjustments; (C) continued sick leave with review; (D) dismissal as a last resort, only where OH advises no realistic prospect of return, all adjustments are genuinely infeasible, consultation has been fair, and the decision is well-documented.
+
+CASE LAW CONTEXT
+Recent tribunal decisions confirm that dismissal must be a last resort, employers must obtain proper medical evidence before dismissing, disability assessment is mandatory rather than optional, reasonable adjustments must be actively explored, and procedural fairness is critical.
+
+CAVEATS AND LIMITATIONS
+This advice is based on the facts as described. If material facts change, we should be consulted again before any final decision. This advice is subject to legal professional privilege and is for internal use only.
+
+Jane Thompson
+Hartwell & Vine LLP
+j.thompson@hartwell-vine.com`,
+    tags: ["employment", "sickness absence", "dismissal", "capability", "disability discrimination", "equality act 2010", "reasonable adjustments", "occupational health", "unfair dismissal", "mental health"],
+  },
+  {
+    id: "adv-012",
+    title: "Employment — Multi-Issue Capability Management: Disability, Race Discrimination and Procedural Fairness",
+    department: "Employment",
+    firmId: "hartwell-vine",
+    date: "2023-01-18",
+    summary:
+      "Hartwell & Vine LLP (instructing solicitor Eleanor Whitfield) advised on a complex capability situation involving a senior clinical psychologist with 12 years' service, of South Asian descent, with a diagnosed disability (chronic migraines) who had requested workplace adjustments and flexible working. The advice addresses how a single flawed capability process can create multiple simultaneous legal breaches: disability discrimination, race discrimination, unfair dismissal, breach of contract and unlawful deduction of wages. It treats occupational health assessment and explicit disability assessment as the foundational steps, analyses the reasonable adjustments duty, and examines the comparative discrimination risk where similar flexible-working requests from other employees were treated more favourably. It warns against summary dismissal without notice (breach of contract) and unauthorised deductions from final pay (unlawful deduction of wages), and quantifies cumulative exposure if all claims succeed at £150,000 to £250,000+ plus legal costs and CQC/Well-Led regulatory risk. The recommended approach is to pause formal proceedings, commission urgent occupational health assessment, conduct a discrimination review of flexible-working decisions, consult the employee informally, and then choose between adjustments, alternative role, part-time working, ill-health retirement, or dismissal as a last resort.",
+    body: `LEGAL ADVICE — CAPABILITY MANAGEMENT WITH DISABILITY AND DISCRIMINATION CONSIDERATIONS
+
+To: Anytown NHS Trust — HR Director and Line Management Team
+From: Hartwell & Vine LLP (Instructing Solicitor: Eleanor Whitfield)
+Date: 18 January 2023
+Classification: Employment & HR — Capability, Disability, Discrimination
+Matter Type: Complex capability management with protected characteristics present
+
+BACKGROUND
+
+We have been instructed regarding concerns about the performance of a Senior Clinical Psychologist (referred to as "the employee"). We understand that the employee has 12 years' service with generally positive reviews; recent concerns relate to migraine-related sick leave (approximately 8 days per year); the employee has requested workplace adjustments including flexible working and a modified office environment; a formal capability review is being considered; the employee is of South Asian descent; and the employee has disclosed a diagnosed disability (chronic migraines). We are also informed that other employees have been granted similar flexible-working requests that were handled differently in this case.
+
+You have asked how to manage this capability situation fairly, whether disability assessments are required, how to avoid discrimination claims, what procedural steps are essential, and what the risks are if this is mishandled. This is a complex case because multiple legal issues intersect.
+
+EXECUTIVE SUMMARY
+
+This capability review carries HIGH LEGAL RISK across multiple jurisdictions if not handled correctly. The presence of disability and the differential treatment of similar requests from other employees creates discrimination risk alongside the capability issue. The safest approach is to pause formal capability proceedings and commission an occupational health assessment and disability review first. This is essential risk management, not delay for its own sake.
+
+LEGAL POSITION
+
+1. DISABILITY ASSESSMENT — THE FOUNDATIONAL ISSUE
+The Equality Act 2010 defines disability as a physical or mental impairment with a substantial and long-term adverse effect on normal day-to-day activities. Chronic migraine causing absences and requiring adjustments will almost certainly meet this definition. You must conduct a positive assessment of disability status BEFORE making any capability decision. Commission an occupational health assessment addressing diagnosis and prognosis, impact on the role, whether the Equality Act definition is met, recommended reasonable adjustments, and return-to-work prospects. If disability is confirmed, shift from "capability" language to "support and adjustment" language.
+
+2. REASONABLE ADJUSTMENTS DUTY
+If the employee is disabled, you must make reasonable adjustments unless they impose unjustifiable hardship. The requested adjustments (flexible hours, dimmed office lighting) are almost certainly reasonable: low cost, not interfering with service delivery, and already granted to other employees. If you refuse an adjustment you must document what it is, why it is allegedly unreasonable, the supporting evidence, alternatives considered, and why those are also unreasonable.
+
+3. DISCRIMINATION — THE COMPARATIVE ELEMENT
+Other employees have been granted flexible working that the employee was refused. This creates (a) disability discrimination risk if the refusal related to disability or disability-related absence, and (b) race discrimination risk if employees of other ethnic backgrounds were treated more favourably in similar circumstances. The critical question is why the request was handled differently; absent a documented business reason, the differential treatment itself becomes evidence of discrimination.
+
+4. PROCEDURAL FAIRNESS IN CAPABILITY PROCEEDINGS
+Even setting aside disability and discrimination, capability proceedings must be fair: document concerns clearly and objectively; obtain occupational health advice; consult genuinely with the employee; explore alternatives to dismissal (different role, phased return, different team, retraining); and document the decision, recording adjustments considered, why alternatives were not feasible, and that the decision falls within the band of reasonable responses.
+
+5. UNEQUAL TREATMENT — THE COMPARATIVE CASE
+The differential treatment of similar flexible-working requests is critical evidence. Where comparators are a different ethnicity or not disabled, the comparison is legally relevant and the differential treatment needs documented justification.
+
+6. DISMISSAL IMPLICATIONS — BREACH OF CONTRACT
+Summary dismissal without notice should only occur for gross misconduct; capability is not gross misconduct. Dismissing without notice and without just cause breaches the contract and the employee can claim wages due during the notice period.
+
+7. DEDUCTION OF WAGES
+Any deduction from final pay (unpaid annual leave, unauthorised deduction) is a separate legal issue. Accrued annual leave must be paid out unless there is a consensual agreement to carry it forward. Summary deductions from final pay are often unlawful.
+
+SPECIFIC RISKS TO ANYTOWN NHS TRUST
+Risk 1: Disability discrimination claim — award range £20,000 to £100,000+; very high likelihood if dismissed without OH assessment.
+Risk 2: Race discrimination claim — award range £15,000 to £80,000+; triggered if differential treatment cannot be justified.
+Risk 3: Unfair dismissal — up to 52 weeks' pay (capped); very high likelihood without proper consultation or OH assessment.
+Risk 4: Breach of contract — notice pay due; near-certain if handled carelessly.
+Risk 5: Unlawful deduction of wages — unauthorised deductions must be refunded.
+Cumulative exposure if all claims succeed: £150,000 to £250,000+ plus legal fees. CQC and Well-Led regulatory risk also applies.
+
+RECOMMENDATIONS
+1. Pause formal capability proceedings now.
+2. Commission an occupational health assessment urgently (within 2 weeks) addressing disability status, prognosis, recommended adjustments, and role viability.
+3. Conduct a discrimination review of all flexible-working requests in the team over the last 3 years, recording who requested, who approved or refused, and documented reasons.
+4. Consult the employee informally to understand what adjustments would help, her medical position, and her aspirations.
+5. Once the OH report is received, choose between: (A, recommended) implement reasonable adjustments with a 3-month review; (B) alternative role with adjustments; (C) managed reduction to part-time; (D) disability-related early retirement; or (E) dismissal as a highest-risk last resort, only if OH confirms no reasonable adjustments can enable her to work and after full consultation and documentation.
+
+CASE LAW CONTEXT
+Employers must not rush to dismiss for capability where disability is involved; differential treatment of similar requests creates prima facie evidence of discrimination requiring explanation; occupational health assessment is not optional when disability is known or suspected (Hensman v Department of Trade and Industry [2000]); reasonable adjustments means genuinely exploring what could work (Cordell v Foreign and Commonwealth Office [2012]); and procedural fairness is critical where protected characteristics are involved (West Midlands Passenger Transport Executive v Singh [1988]).
+
+CAVEATS
+This advice is based on the facts as described. If additional information emerges (genuine performance issues, misconduct, or medical evidence that she cannot work in an NHS setting), we should be consulted again. This advice is subject to legal professional privilege and is for internal use only.
+
+Eleanor Whitfield
+Hartwell & Vine LLP
+e.whitfield@hartwell-vine.com`,
+    tags: ["employment", "capability", "disability discrimination", "race discrimination", "unfair dismissal", "breach of contract", "unlawful deduction of wages", "equality act 2010", "reasonable adjustments", "occupational health", "multi-issue", "procedural fairness"],
+  },
 ];
