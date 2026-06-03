@@ -60,6 +60,11 @@ const CURRENT_WITHIN_MONTHS = 48;
 const STALE_AFTER_MONTHS = 60;
 // Top-document score at or above this is treated as a strong, on-point match.
 const STRONG_MATCH_SCORE = 5;
+// A document only counts toward the practice-area spread if its score is at
+// least this fraction of the top match. This prevents weak, incidental keyword
+// hits (e.g. a stray "data" match) from being treated as a genuine reliance on
+// a second practice area.
+const SUBSTANTIVE_SCORE_RATIO = 0.4;
 
 export type ConfidenceRating = "green" | "amber" | "red";
 
@@ -93,10 +98,19 @@ export function assessConfidence(
     };
   }
 
-  const topScore = scoreDocument(relevant[0], query);
+  const scored = relevant.map((d) => ({
+    doc: d,
+    score: scoreDocument(d, query),
+  }));
+  const topScore = scored[0].score;
   // Age of the most recent supporting document.
   const newestAge = Math.min(...relevant.map((d) => monthsSince(d.date, now)));
-  const departments = new Set(relevant.map((d) => d.department));
+  // Only documents that materially contributed to the answer count toward the
+  // practice-area spread — weak incidental keyword hits are ignored.
+  const substantive = scored.filter(
+    ({ score }) => score >= topScore * SUBSTANTIVE_SCORE_RATIO
+  );
+  const departments = new Set(substantive.map(({ doc }) => doc.department));
   const crossPracticeArea = departments.size > 1;
   const strongMatch = topScore >= STRONG_MATCH_SCORE;
 
