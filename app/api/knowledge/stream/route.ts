@@ -1,4 +1,4 @@
-import { anthropic, CLAUDE_MODEL, SYSTEM_PROMPT, findRelevantDocs } from "@/lib/ai";
+import { anthropic, CLAUDE_MODEL, SYSTEM_PROMPT, findRelevantDocs, assessConfidence } from "@/lib/ai";
 import { adviceDocs } from "@/data/advice-docs";
 import { firms } from "@/data/firms";
 
@@ -40,11 +40,16 @@ ${doc.summary}`;
     date: doc.date,
   }));
 
+  // Traffic-light confidence rating for this query.
+  const confidence = assessConfidence(query, relevant);
+
   const stream = new ReadableStream({
     async start(controller) {
-      // First: emit sources as a prefixed JSON line
+      // First: emit sources and confidence as a prefixed JSON line
       controller.enqueue(
-        encoder.encode(`SOURCES:${JSON.stringify(sourceMeta)}\n`)
+        encoder.encode(
+          `SOURCES:${JSON.stringify({ sources: sourceMeta, confidence })}\n`
+        )
       );
 
       try {

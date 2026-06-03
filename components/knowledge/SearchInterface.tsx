@@ -12,12 +12,52 @@ const EXAMPLE_QUERIES = [
 
 type Status = "idle" | "loading" | "streaming" | "done" | "error";
 
+type Confidence = {
+  rating: "green" | "amber" | "red";
+  label: string;
+  reason: string;
+};
+
+const CONFIDENCE_STYLES: Record<
+  Confidence["rating"],
+  { dot: string; text: string; bg: string; border: string }
+> = {
+  green: { dot: "#10B981", text: "#10B981", bg: "#F0FDF8", border: "#A7F3D0" },
+  amber: { dot: "#F59E0B", text: "#B45309", bg: "#FFFBEB", border: "#FDE68A" },
+  red: { dot: "#DC2626", text: "#DC2626", bg: "#FEF2F2", border: "#FECACA" },
+};
+
+function ConfidenceBadge({ confidence }: { confidence: Confidence }) {
+  const s = CONFIDENCE_STYLES[confidence.rating];
+  return (
+    <div
+      className="flex items-start gap-3 rounded-lg border px-4 py-3 transition-all duration-200 ease-out"
+      style={{ backgroundColor: s.bg, borderColor: s.border }}
+    >
+      <span
+        className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
+        style={{ backgroundColor: s.dot }}
+      />
+      <div>
+        <p
+          className="text-xs font-semibold uppercase tracking-wider"
+          style={{ color: s.text }}
+        >
+          {confidence.label}
+        </p>
+        <p className="mt-0.5 text-sm text-[#334155]/80">{confidence.reason}</p>
+      </div>
+    </div>
+  );
+}
+
 export default function SearchInterface() {
   const [query, setQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [response, setResponse] = useState("");
   const [sources, setSources] = useState<SourceMeta[]>([]);
+  const [confidence, setConfidence] = useState<Confidence | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -29,6 +69,7 @@ export default function SearchInterface() {
     setStatus("loading");
     setResponse("");
     setSources([]);
+    setConfidence(null);
     setErrorMsg("");
 
     try {
@@ -65,7 +106,13 @@ export default function SearchInterface() {
             const sourcesLine = buffer.slice(0, nl);
             try {
               const parsed = JSON.parse(sourcesLine.replace("SOURCES:", ""));
-              setSources(parsed);
+              // Payload shape: { sources: SourceMeta[], confidence: Confidence }
+              if (Array.isArray(parsed)) {
+                setSources(parsed); // backwards-compatible fallback
+              } else {
+                if (Array.isArray(parsed.sources)) setSources(parsed.sources);
+                if (parsed.confidence) setConfidence(parsed.confidence);
+              }
             } catch {
               // Sources line malformed — continue without citations
             }
@@ -102,6 +149,7 @@ export default function SearchInterface() {
     setStatus("idle");
     setResponse("");
     setSources([]);
+    setConfidence(null);
     setErrorMsg("");
     setTimeout(() => textareaRef.current?.focus(), 50);
   }
@@ -174,6 +222,9 @@ export default function SearchInterface() {
               </p>
               <p className="text-sm text-[#1F3A5F] font-medium">{submittedQuery}</p>
             </div>
+
+            {/* Confidence traffic light */}
+            {confidence && <ConfidenceBadge confidence={confidence} />}
 
             {/* Response */}
             <div className="rounded-lg border border-[#E2E8F0] bg-white px-5 py-5">
@@ -254,4 +305,4 @@ export default function SearchInterface() {
 }
 
 // Accessed at module level so the server-rendered count is consistent
-const adviceDocCount = 10;
+const adviceDocCount = 12;

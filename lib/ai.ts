@@ -40,6 +40,106 @@ export function findRelevantDocs(
     .map(({ doc }) => doc);
 }
 
+// ---------------------------------------------------------------------------
+// Confidence assessment — the Knowledge Centre traffic-light system.
+//
+// The rating tells the user whether the surfaced advice is safe to rely on
+// (green), should be treated with caution (amber), or whether fresh external
+// legal advice should be obtained (red). It combines three signals: how
+// strongly the corpus matched the query, how recent the supporting advice is,
+// and whether the answer draws on more than one practice area.
+//
+// Recency windows are deliberately generous because core NHS legal principles
+// (Equality Act 2010, Employment Rights Act 1996, etc.) are slow to change.
+// Adjust the constants below to tune the system.
+// ---------------------------------------------------------------------------
+
+// Advice within this age is treated as current.
+const CURRENT_WITHIN_MONTHS = 48;
+// Advice older than this is treated as stale and no longer dependable.
+const STALE_AFTER_MONTHS = 60;
+// Top-document score at or above this is treated as a strong, on-point match.
+const STRONG_MATCH_SCORE = 5;
+
+export type ConfidenceRating = "green" | "amber" | "red";
+
+export type Confidence = {
+  rating: ConfidenceRating;
+  label: string;
+  reason: string;
+};
+
+function monthsSince(dateStr: string, now: Date): number {
+  const then = new Date(dateStr);
+  if (Number.isNaN(then.getTime())) return Number.POSITIVE_INFINITY;
+  return (
+    (now.getFullYear() - then.getFullYear()) * 12 +
+    (now.getMonth() - then.getMonth())
+  );
+}
+
+export function assessConfidence(
+  query: string,
+  relevant: AdviceDocument[],
+  now: Date = new Date()
+): Confidence {
+  // No meaningful match in the corpus.
+  if (relevant.length === 0) {
+    return {
+      rating: "red",
+      label: "Seek fresh advice",
+      reason:
+        "No current advice on file addresses this question. Obtain fresh legal advice before proceeding.",
+    };
+  }
+
+  const topScore = scoreDocument(relevant[0], query);
+  // Age of the most recent supporting document.
+  const newestAge = Math.min(...relevant.map((d) => monthsSince(d.date, now)));
+  const departments = new Set(relevant.map((d) => d.department));
+  const crossPracticeArea = departments.size > 1;
+  const strongMatch = topScore >= STRONG_MATCH_SCORE;
+
+  // The most relevant advice is stale, or the match is weak and ageing.
+  if (newestAge > STALE_AFTER_MONTHS) {
+    return {
+      rating: "red",
+      label: "Seek fresh advice",
+      reason:
+        "The only matching advice is more than five years old and may no longer reflect current law. Obtain fresh legal advice before proceeding.",
+    };
+  }
+
+  // Caution conditions: weaker match, ageing advice, or a cross-practice-area answer.
+  if (!strongMatch || newestAge > CURRENT_WITHIN_MONTHS || crossPracticeArea) {
+    const reasons: string[] = [];
+    if (newestAge > CURRENT_WITHIN_MONTHS) {
+      reasons.push("the most relevant advice is over four years old");
+    }
+    if (crossPracticeArea) {
+      reasons.push(
+        "the answer draws on documents from more than one practice area"
+      );
+    }
+    if (!strongMatch) {
+      reasons.push("the corpus match is partial rather than directly on point");
+    }
+    return {
+      rating: "amber",
+      label: "Proceed with caution",
+      reason: `Proceed with caution — ${reasons.join("; ")}. Verify against current guidance before acting.`,
+    };
+  }
+
+  // Strong, on-point match backed by reasonably recent advice.
+  return {
+    rating: "green",
+    label: "Safe to rely on",
+    reason:
+      "This question is directly addressed by recent advice on file and is safe to rely on.",
+  };
+}
+
 export const SYSTEM_PROMPT = `You are the Knowledge Centre for Anytown NHS Trust — an AI assistant that helps the Trust's Finance and Governance team quickly find and understand relevant prior legal advice.
 
 You will be given summaries of advice documents from the Trust's legal corpus that are relevant to the question asked. Your role is to synthesise the information from these documents into a clear, practical response.
